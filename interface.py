@@ -3,6 +3,8 @@ import json
 import random
 import sys
 
+from update_response_scores import update_response_scores
+
 pygame.init()
 
 
@@ -106,10 +108,12 @@ class QuestionsManager:
             w, h = 200, 80
             result_rect = pygame.Rect(WIDTH // 2 - w/2, HEIGHT // 2 - h / 2, w, h)
             self.result_button = Button(result_rect, (163, 73, 38), (163, 73, 38), (45, 45, 45), "GRESIT :(", 18, should_draw=True)
+            update_response_scores(self.question_button.text, self.human_answer, self.chatgpt_answer)
         if pressedButton != None and pressedButton.text == self.chatgpt_answer:
             w, h = 200, 80
             result_rect = pygame.Rect(WIDTH // 2 - w/2, HEIGHT // 2 - h / 2, w, h)
             self.result_button = Button(result_rect, (204, 154, 39), (204, 154, 39), (45, 45, 45), "CORECT :)", 18, should_draw=True)
+            update_response_scores(self.question_button.text, self.chatgpt_answer, self.human_answer)
 
         if pressedButton != None:
             self.result_button.draw(surface, center=True, wrapped=False)
